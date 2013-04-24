@@ -1,0 +1,11 @@
+# puppet
+
+APP_ROOT  = "<%= app_root %>"
+RAILS_ENV = "production"
+
+pid         "#{APP_ROOT}/tmp/pids/unicorn.pid"
+listen      "<%= @listen %>"
+stderr_path "#{APP_ROOT}/log/unicorn_error.log"
+
+working_directory "#{APP_ROOT}"
+worker_processes 4

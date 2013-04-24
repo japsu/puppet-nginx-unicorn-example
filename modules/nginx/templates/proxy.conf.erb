@@ -1,0 +1,22 @@
+# puppet
+
+server {
+    listen 80;
+    server_name <%= @title %>;
+
+    location / {
+        rewrite ^(.*)$ https://<%= @title %>$1;
+    }    
+}
+
+server {
+    listen 443;
+    server_name <%= @title %>;
+    ssl on;
+
+    location / {
+        proxy_pass <%= @target %>;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
